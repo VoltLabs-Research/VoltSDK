@@ -1,7 +1,7 @@
 {
-    "name": "@voltlabs/daemon-cluster-client",
+    "name": "@voltstack/daemon-cluster-client",
     "version": "1.0.0",
-    "description": "Standalone Node.js SDK for cluster-daemon ↔ Volt server communication — enrollment, control socket, heartbeat and reverse-channel dispatch",
+    "description": "Standalone Node.js SDK for cluster-daemon + Volt server communication, enrollment, control socket, heartbeat and reverse-channel dispatch",
     "author": "VoltLabs",
     "license": "MIT",
     "type": "module",
