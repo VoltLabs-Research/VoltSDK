@@ -68,7 +68,7 @@ export default class FetchHttpClient implements HttpClient {
     private async toApiError(error: unknown, signal?: AbortSignal): Promise<never> {
         if (error instanceof ApiError) throw error;
 
-        // AbortError — re-throw without wrapping, preserving dedup/cancel semantics.
+        // AbortError - re-throw without wrapping, preserving dedup/cancel semantics.
         if (error instanceof DOMException && error.name === 'AbortError') throw error;
         if (error instanceof Error && error.name === 'AbortError') throw error;
 

@@ -99,7 +99,7 @@ describe('HeartbeatManager', () => {
         assert.ok(lastError instanceof Error);
     });
 
-    it('start() is idempotent — calling twice does not double-fire', async () => {
+    it('start() is idempotent - calling twice does not double-fire', async () => {
         const manager = new HeartbeatManager({ interval: 10_000 }, sendHeartbeat, onError);
         manager.start();
         manager.start();

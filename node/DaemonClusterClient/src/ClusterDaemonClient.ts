@@ -22,7 +22,7 @@ export interface ClusterDaemonClientOptions {
     serverUrl: string;
     /** URL of the socket.io control namespace, e.g. `wss://cloud.voltlabs.io`. */
     controlSocketUrl: string;
-    /** Initial credentials — `daemonPassword` may be rotated after enrollment. */
+    /** Initial credentials - `daemonPassword` may be rotated after enrollment. */
     credentials: DaemonCredentials;
     /** Enrollment (healthcheck) options. */
     enrollment?: EnrollmentOptions;
@@ -191,7 +191,7 @@ export class ClusterDaemonClient {
     /**
      * Registers a handler for an inbound command dispatched by the reverse channel.
      *
-     * Handlers survive reconnections — register once at startup.
+     * Handlers survive reconnections - register once at startup.
      *
      * @returns `this` for fluent chaining.
      */

@@ -10,7 +10,7 @@ export const staticToken = (token: string): CredentialProvider => ({
 
 /**
  * Returns a credential provider for a VoltLabs secret key (`vsk_*` prefix).
- * Functionally identical to `staticToken` — the prefix validates on the server.
+ * Functionally identical to `staticToken` - the prefix validates on the server.
  * Prefer this preset over `staticToken` when working with secret keys to make
  * intent explicit in code.
  */

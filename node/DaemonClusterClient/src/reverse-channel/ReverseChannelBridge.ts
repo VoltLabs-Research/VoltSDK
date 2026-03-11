@@ -18,7 +18,7 @@ type NonCommandMessage = Exclude<TeamClusterDaemonMessage, TeamClusterDaemonComm
  * and dispatches `command` type messages to registered handlers.
  *
  * All other message types (session-input, tunnel-open, etc.) are forwarded to
- * consumers via `onMessage()` callbacks — the bridge never interprets them.
+ * consumers via `onMessage()` callbacks - the bridge never interprets them.
  *
  * Handlers are registered once and survive socket reconnections because the
  * `ControlSocketManager` calls `bindToSocket()` on each new socket instance.
@@ -46,7 +46,7 @@ export class ReverseChannelBridge {
 
     /**
      * Attaches this bridge to the provided socket.
-     * Called by `ControlSocketManager` on every (re)connect — the same handler
+     * Called by `ControlSocketManager` on every (re)connect - the same handler
      * registry is reused, so callers only register handlers once.
      *
      * @param socket - The newly created socket.io-client `Socket`.

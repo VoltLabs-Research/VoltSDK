@@ -166,7 +166,7 @@ describe('ReverseChannelBridge', () => {
         assert.equal(socket.emitted.length, 0, 'stale socket events should be ignored');
     });
 
-    it('unregisterHandler removes handler — unknown command reply is 404', async () => {
+    it('unregisterHandler removes handler - unknown command reply is 404', async () => {
         const bridge = new ReverseChannelBridge();
         const socket = createMockSocket();
 

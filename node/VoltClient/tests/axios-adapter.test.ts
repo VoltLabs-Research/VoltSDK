@@ -31,7 +31,7 @@ describe('AxiosHttpClient – FormData Content-Type stripping', () => {
 
         assert.ok(
             capturedContentType !== 'application/json',
-            `Content-Type must not be application/json for FormData — got: ${capturedContentType}`
+            `Content-Type must not be application/json for FormData - got: ${capturedContentType}`
         );
 
         mock.restore();
@@ -66,7 +66,7 @@ describe('AxiosHttpClient – error normalization', () => {
         const axiosInstance = (client as unknown as { api: ReturnType<typeof axios.create> }).api;
         const mock = new MockAdapter(axiosInstance);
 
-        // Empty body — no server code, so fallback code Http::404 is used
+        // Empty body - no server code, so fallback code Http::404 is used
         mock.onGet('/missing').reply(404, {});
 
         await assert.rejects(

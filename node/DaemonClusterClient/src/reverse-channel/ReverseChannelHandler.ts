@@ -5,7 +5,7 @@ import type { CommandResult, HandlerContext } from './types';
  *
  * Implement this interface to handle a specific `command` name.  The SDK
  * dispatches the call, wraps the result into a response envelope and sends it
- * back automatically — handlers never touch the socket directly.
+ * back automatically - handlers never touch the socket directly.
  *
  * @example
  * ```typescript

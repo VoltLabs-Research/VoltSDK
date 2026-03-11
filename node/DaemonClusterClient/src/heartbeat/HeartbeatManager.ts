@@ -6,7 +6,7 @@ const DEFAULT_INTERVAL_MS = 30_000;
  * Manages a periodic heartbeat loop that sends `runtime.heartbeat` commands
  * to the Volt server.
  *
- * Individual heartbeat failures are logged and swallowed — the loop continues
+ * Individual heartbeat failures are logged and swallowed - the loop continues
  * regardless. Only a caller-initiated `stop()` terminates it.
  */
 export class HeartbeatManager {

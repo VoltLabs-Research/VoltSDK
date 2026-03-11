@@ -12,8 +12,8 @@ export interface VoltClientFactoryOptions {
     credential?: CredentialProvider;
     /**
      * HTTP adapter to use.
-     * - `'fetch'` (default): native fetch — no extra dependencies, Node 18+.
-     * - `'axios'`: Axios adapter — required for upload progress reporting.
+     * - `'fetch'` (default): native fetch - no extra dependencies, Node 18+.
+     * - `'axios'`: Axios adapter - required for upload progress reporting.
      */
     adapter?: 'fetch' | 'axios';
     /** Request timeout in milliseconds. Default: 30 000. */

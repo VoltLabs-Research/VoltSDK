@@ -5,7 +5,7 @@ export interface DaemonCredentials {
     /** Permanent identifier for this cluster instance. */
     teamClusterId: string;
     /**
-     * Daemon password — may be rotated by the server on each enrollment cycle.
+     * Daemon password - may be rotated by the server on each enrollment cycle.
      * The client updates this internally after a successful enrollment.
      */
     daemonPassword: string;
