@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "voltsdk"
+version = "1.0.0"
+description = "VoltSDK for Python"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "msgpack>=1.0.0",
+  "pandas>=2.0.0",
+  "requests>=2.31.0"
+]
+
+[project.optional-dependencies]
+visualization = [
+  "vtk>=9.2.0"
+]
+notebook = [
+  "vtk>=9.2.0",
+  "k3d>=2.16.0"
+]
+
+[tool.setuptools]
+packages = ["voltsdk"]
+
+[tool.setuptools.package-dir]
+voltsdk = "."

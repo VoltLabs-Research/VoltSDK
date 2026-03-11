@@ -2,7 +2,6 @@ from typing import Any, Optional
 import msgpack
 import os
 import pandas as pd
-import vtk
 
 
 def get_nested_value(data: Any, path: Optional[str]) -> Any:
@@ -86,6 +85,13 @@ def msgpack_as_df(file_path: str, iterable_key: Optional[str] = None):
 def view_glb(file_path: str):
     if not os.path.exists(file_path):
         raise RuntimeError(f'file not found: {file_path}')
+
+    try:
+        import vtk
+    except Exception as error:
+        raise RuntimeError(
+            'vtk is required to view GLB files. Install with: pip install "voltsdk[visualization]"'
+        ) from error
 
     reader = vtk.vtkGLTFReader()
     reader.SetFileName(file_path)
