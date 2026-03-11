@@ -14,7 +14,7 @@ Install visualization support with:
 pip install "voltsdk[visualization]"
 ```
 
-Install notebook support with:
+Install notebook s  upport with:
 
 ```bash
 pip install "voltsdk[notebook]"
