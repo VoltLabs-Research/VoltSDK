@@ -23,8 +23,13 @@ notebook = ["vtk>=9.2.0", "k3d>=2.16.0"]
 ovito = ["ovito>=3.9.0"]
 all = ["vtk>=9.2.0", "k3d>=2.16.0", "ovito>=3.9.0"]
 
-[tool.setuptools.packages.find]
-include = ["voltsdk*"]
+[tool.setuptools]
+packages = [
+    "voltsdk",
+    "voltsdk.resources",
+    "voltsdk.io",
+    "voltsdk.integrations",
+]
 
 [tool.setuptools.package-dir]
 voltsdk = "."

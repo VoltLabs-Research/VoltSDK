@@ -1,0 +1,56 @@
+Metadata-Version: 2.4
+Name: voltsdk
+Version: 2.0.0
+Summary: Python SDK for the Volt scientific computing platform
+License: MIT
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: msgpack>=1.0.0
+Requires-Dist: pandas>=2.0.0
+Requires-Dist: requests>=2.31.0
+Requires-Dist: matplotlib>=3.7.0
+Provides-Extra: visualization
+Requires-Dist: vtk>=9.2.0; extra == "visualization"
+Provides-Extra: notebook
+Requires-Dist: vtk>=9.2.0; extra == "notebook"
+Requires-Dist: k3d>=2.16.0; extra == "notebook"
+Provides-Extra: ovito
+Requires-Dist: ovito>=3.9.0; extra == "ovito"
+Provides-Extra: all
+Requires-Dist: vtk>=9.2.0; extra == "all"
+Requires-Dist: k3d>=2.16.0; extra == "all"
+Requires-Dist: ovito>=3.9.0; extra == "all"
+
+# voltsdk
+
+Python SDK for interacting with the Volt API.
+
+## Installation
+
+```bash
+pip install voltsdk
+```
+
+Install visualization support with:
+
+```bash
+pip install "voltsdk[visualization]"
+```
+
+Install notebook s  upport with:
+
+```bash
+pip install "voltsdk[notebook]"
+```
+
+## Usage
+
+```python
+from voltsdk import VoltClient
+
+client = VoltClient(
+    secret_key="your-secret-key",
+    base_url="https://api.example.com"
+)
+```
+
