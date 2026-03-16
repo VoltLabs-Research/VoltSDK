@@ -4,8 +4,8 @@ Provides :func:`msgpack_as_df` for loading Volt analysis result files
 (``*.msgpack``) into pandas DataFrames, with support for chunked
 streaming and nested key extraction.
 
-These functions were originally in ``voltsdk/utils.py`` and are
-preserved with the same signatures for backward compatibility.
+These functions parse Volt MessagePack result files into pandas-native
+structures for notebook and daemon workflows.
 """
 
 from __future__ import annotations

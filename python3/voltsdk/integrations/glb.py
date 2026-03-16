@@ -3,8 +3,7 @@
 Provides :func:`view_glb` for rendering GLTF/GLB models either in a
 Jupyter notebook (using k3d) or in a desktop window (using VTK).
 
-This function was originally in ``voltsdk/utils.py`` and is preserved
-with the same signature for backward compatibility.
+This module provides interactive rendering helpers for GLB assets.
 """
 
 from __future__ import annotations

@@ -23,12 +23,10 @@ happens lazily when a resource property is accessed.
 from __future__ import annotations
 
 import os
-import warnings
-from typing import Any
 
 from .http import HttpTransport
 from .resources.teams import Team
-from .resources.trajectories import Trajectory, TrajectoryCollection
+from .resources.trajectories import TrajectoryCollection
 from .resources.analyses import AnalysisCollection
 from .resources.plugins import PluginCollection
 
@@ -141,160 +139,6 @@ class VoltClient:
     def plugins(self) -> PluginCollection:
         """Lazy, paginated collection of available analysis plugins."""
         return PluginCollection(self._http)
-
-    # ------------------------------------------------------------------
-    # Deprecated legacy API (backward compatibility)
-    # ------------------------------------------------------------------
-
-    def list_analyses(
-        self,
-        trajectory_id: str,
-        page: int = 1,
-        limit: int = 1000,
-    ) -> list[dict]:
-        """.. deprecated:: 2.0
-            Use ``client.trajectories.get(id).analyses`` instead.
-        """
-        warnings.warn(
-            'list_analyses() is deprecated. '
-            'Use client.trajectories.get(id).analyses instead.',
-            DeprecationWarning,
-            stacklevel=2,
-        )
-        response = self._http.get(
-            f'/analyses/{self._http.team_id}/trajectory/{trajectory_id}',
-            params={'page': page, 'limit': limit},
-        )
-        data = response.get('data', response) if isinstance(response, dict) else response
-        return data if isinstance(data, list) else []
-
-    def find_analysis_by_id(self, analysis_id: str) -> dict:
-        """.. deprecated:: 2.0
-            Use ``client.trajectories.get(tid).analyses`` and filter.
-        """
-        warnings.warn(
-            'find_analysis_by_id() is deprecated.',
-            DeprecationWarning,
-            stacklevel=2,
-        )
-        return self._http.get(
-            f'/analyses/{self._http.team_id}/{analysis_id}',
-        )
-
-    def list_analysis_results(
-        self,
-        analysis_id: str,
-        page: int = 1,
-        limit: int = 1000,
-    ) -> list[dict]:
-        """.. deprecated:: 2.0
-            Use ``analysis.listings.to_dataframe()`` instead.
-        """
-        warnings.warn(
-            'list_analysis_results() is deprecated. '
-            'Use analysis.listings.to_dataframe() instead.',
-            DeprecationWarning,
-            stacklevel=2,
-        )
-        response = self._http.get(
-            f'/plugins/{self._http.team_id}/listings/analyses/{analysis_id}',
-            params={'page': page, 'limit': limit},
-        )
-        data = response.get('data', response) if isinstance(response, dict) else response
-        return data if isinstance(data, list) else []
-
-    def download_analysis_artifacts(
-        self,
-        analysis_id: str,
-        unzip: bool = True,
-    ) -> str:
-        """.. deprecated:: 2.0
-            Use ``analysis.download_artifacts()`` instead.
-        """
-        warnings.warn(
-            'download_analysis_artifacts() is deprecated. '
-            'Use analysis.download_artifacts() instead.',
-            DeprecationWarning,
-            stacklevel=2,
-        )
-        zip_path = self._http.download_stream(
-            f'/plugins/{self._http.team_id}/exposures/analyses/{analysis_id}/export',
-            fallback_name=f'analysis-{analysis_id}-artifacts.zip',
-        )
-        if unzip:
-            return self._http.unzip_recursive(zip_path)
-        return zip_path
-
-    def download_plugin_results_file(
-        self,
-        analysis_id: str,
-        unzip: bool = True,
-    ) -> str:
-        """.. deprecated:: 2.0
-            Alias for :meth:`download_analysis_artifacts`.
-        """
-        warnings.warn(
-            'download_plugin_results_file() is deprecated. '
-            'Use analysis.download_artifacts() instead.',
-            DeprecationWarning,
-            stacklevel=2,
-        )
-        return self.download_analysis_artifacts(analysis_id, unzip=unzip)
-
-    def download_frame_glb(
-        self,
-        analysis_id: str,
-        timestep: int,
-    ) -> str:
-        """.. deprecated:: 2.0
-            Use ``frame.download_glb(analysis_id=...)`` instead.
-        """
-        warnings.warn(
-            'download_frame_glb() is deprecated. '
-            'Use frame.download_glb(analysis_id=...) instead.',
-            DeprecationWarning,
-            stacklevel=2,
-        )
-        trajectory_id = self._resolve_trajectory_id(analysis_id)
-        return self._http.download_stream(
-            f'/trajectories/{self._http.team_id}/{trajectory_id}/glb/{timestep}/{analysis_id}',
-            fallback_name=f'frame-{analysis_id}-{timestep}.glb',
-        )
-
-    def download_plugin_exported_glb(
-        self,
-        analysis_id: str,
-        exposure_id: str,
-        timestep: int,
-    ) -> str:
-        """.. deprecated:: 2.0
-            Use ``exposure.download_glb(timestep=...)`` instead.
-        """
-        warnings.warn(
-            'download_plugin_exported_glb() is deprecated. '
-            'Use exposure.download_glb(timestep=...) instead.',
-            DeprecationWarning,
-            stacklevel=2,
-        )
-        trajectory_id = self._resolve_trajectory_id(analysis_id)
-        return self._http.download_stream(
-            f'/plugins/{self._http.team_id}/exposures/glb/{trajectory_id}/{analysis_id}/{exposure_id}/{timestep}',
-            fallback_name=f'plugin-glb-{analysis_id}-{exposure_id}-{timestep}.glb',
-        )
-
-    # ------------------------------------------------------------------
-    # Internal helpers for deprecated methods
-    # ------------------------------------------------------------------
-
-    def _resolve_trajectory_id(self, analysis_id: str) -> str:
-        """Fetch analysis to get its trajectory ID."""
-        analysis = self._http.get(
-            f'/analyses/{self._http.team_id}/{analysis_id}',
-        )
-        trajectory_id = analysis.get('trajectory')
-        if not trajectory_id:
-            raise RuntimeError('Analysis trajectory not found')
-        return trajectory_id
 
     # ------------------------------------------------------------------
     # Dunder

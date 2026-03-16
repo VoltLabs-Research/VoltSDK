@@ -22,7 +22,6 @@ from .exceptions import (
     VoltTimeoutError,
 )
 
-# Backward-compatible re-exports from the old utils.py
 from .io.msgpack import msgpack_as_df
 from .integrations.glb import view_glb
 
@@ -37,9 +36,9 @@ __all__ = [
     'VoltNotFoundError',
     'VoltPermissionError',
     'VoltTimeoutError',
-    # Utilities (backward compat)
+    # Utilities
     'msgpack_as_df',
     'view_glb',
 ]
 
-__version__ = '2.0.0'
+__version__ = '2.1.0'
